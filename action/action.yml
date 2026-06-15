@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Victor França
+name: DPG Determinism Gate
+description: >-
+  Gate a CI pipeline on Deterministic Process Governance (DPG) criteria. Runs
+  `dpg gate` over one or more process models (or pre-computed compiler results)
+  and fails the job when the determinism profile violates the gate policy.
+author: Victor França
+branding:
+  icon: check-circle
+  color: blue
+
+inputs:
+  files:
+    description: >-
+      Newline- or space-separated process models / compiler-result JSON files to
+      gate. Each is gated independently; the job fails if any one fails.
+    required: true
+  fail-on:
+    description: "Severity at or above which the gate fails: error | warning | info."
+    required: false
+    default: warning
+  profile:
+    description: Runtime profile id to analyze against.
+    required: false
+    default: camunda-7
+  policy:
+    description: Governance policy id to analyze against.
+    required: false
+    default: baseline-tier-1
+  format:
+    description: "Report format printed to the log: text | json."
+    required: false
+    default: text
+  allow-missing-profile:
+    description: When 'true', do not fail if no runtime profile resolves.
+    required: false
+    default: "false"
+  working-directory:
+    description: Directory to resolve the input files from.
+    required: false
+    default: "."
+
+runs:
+  using: composite
+  steps:
+    - name: Run DPG determinism gate
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        DPG_FILES: ${{ inputs.files }}
+        DPG_FAIL_ON: ${{ inputs.fail-on }}
+        DPG_PROFILE: ${{ inputs.profile }}
+        DPG_POLICY: ${{ inputs.policy }}
+        DPG_FORMAT: ${{ inputs.format }}
+        DPG_ALLOW_MISSING_PROFILE: ${{ inputs.allow-missing-profile }}
+      run: |
+        set -euo pipefail
+        extra=()
+        if [ "${DPG_ALLOW_MISSING_PROFILE}" = "true" ]; then
+          extra+=(--allow-missing-profile)
+        fi
+        status=0
+        for file in ${DPG_FILES}; do
+          echo "::group::dpg gate ${file}"
+          if dpg gate "${file}" \
+            --fail-on "${DPG_FAIL_ON}" \
+            --profile "${DPG_PROFILE}" \
+            --policy "${DPG_POLICY}" \
+            --format "${DPG_FORMAT}" \
+            "${extra[@]}"; then
+            echo "gate passed: ${file}"
+          else
+            echo "::error file=${file}::DPG determinism gate failed for ${file}"
+            status=1
+          fi
+          echo "::endgroup::"
+        done
+        exit "${status}"
