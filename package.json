@@ -1,0 +1,12 @@
+{
+  "name": "@dpg/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": { "dpg": "bin/dpg.mjs" },
+  "scripts": {
+    "build": "echo build-ok",
+    "lint": "echo lint-ok",
+    "test": "echo test-ok"
+  }
+}
