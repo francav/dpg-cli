@@ -43,7 +43,7 @@ const usage = (): string =>
     "  --allow-missing-profile  do not fail when no runtime profile resolves",
     "",
     "An input ending in .json is treated as a pre-computed compiler result;",
-    "BPMN/DMN models are analyzed via the optional @dpg/compiler-node engine.",
+    "BPMN/DMN models are analyzed via the optional @francav/compiler-node engine.",
   ].join("\n");
 
 /**

@@ -1,4 +1,4 @@
-# @dpg/cli
+# @francav/cli
 
 Command-line tools for **Deterministic Process Governance (DPG)** — analyze process models and gate
 pipelines on behavioral-predictability criteria from the terminal or CI.
@@ -33,7 +33,7 @@ Exit codes: `0` the gate passes, `1` the gate fails, `2` a usage or analysis err
 
 The CLI is self-contained. An input ending in `.json` is treated as a pre-computed compiler-result
 document and gated directly — the zero-dependency path used in CI. To analyze a `.bpmn` / `.dmn`
-model directly, install the optional `@dpg/compiler-node` engine alongside the CLI; the CLI loads it
+model directly, install the optional `@francav/compiler-node` engine alongside the CLI; the CLI loads it
 on demand.
 
 ## GitHub Action
@@ -41,7 +41,7 @@ on demand.
 This repo ships a composite action under [`action/`](./action) that runs the gate in a workflow:
 
 ```yaml
-- run: npm install -g @dpg/cli
+- run: npm install -g @francav/cli
 - uses: francav/dpg-cli/action@main
   with:
     files: process/model.bpmn

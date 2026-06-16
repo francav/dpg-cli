@@ -26,7 +26,7 @@ export interface AnalysisEngine {
 
 /**
  * Shape of the compiler entrypoint we load dynamically. Mirrors
- * `@dpg/compiler-node`'s `compileFromFiles` without importing it at build time.
+ * `@francav/compiler-node`'s `compileFromFiles` without importing it at build time.
  */
 interface CompilerNodeModule {
   compileFromFiles(options: {
@@ -37,7 +37,7 @@ interface CompilerNodeModule {
   }): Promise<unknown>;
 }
 
-const COMPILER_MODULE = "@dpg/compiler-node";
+const COMPILER_MODULE = "@francav/compiler-node";
 
 const isDmn = (file: string): boolean => extname(file).toLowerCase() === ".dmn";
 const isJson = (file: string): boolean => extname(file).toLowerCase() === ".json";

@@ -10,7 +10,7 @@ CLI, then runs `dpg gate` over the artifacts in [`process/`](./process):
 
 The files here are pre-computed compiler-result documents, so the gate runs with zero heavyweight
 dependencies — the realistic CI path. To gate BPMN/DMN models directly, install the optional
-`@dpg/compiler-node` engine alongside the CLI and point `dpg gate` at the `.bpmn` / `.dmn` file.
+`@francav/compiler-node` engine alongside the CLI and point `dpg gate` at the `.bpmn` / `.dmn` file.
 
 ## Run it locally
 
@@ -25,7 +25,7 @@ dpg gate examples/sample-repo/process/loan-preapproval.result.json --fail-on err
 
 ```yaml
 - uses: actions/checkout@v4
-- run: npm install -g @dpg/cli
+- run: npm install -g @francav/cli
 - uses: francav/dpg-cli/action@main
   with:
     files: process/loan-preapproval.result.json
