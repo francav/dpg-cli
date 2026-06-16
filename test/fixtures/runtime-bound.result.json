@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "compilerVersion": "0.1.0",
+    "timestamp": "2026-06-15T22:23:19.984Z",
+    "modelId": "runtime-bound",
+    "inputHashes": {
+      "bpmn": "cfa6c91244a5794f349f0ca0e1305a2f50aec9a9da83aa585281d81649b86dcd",
+      "dmn": "8afb976e56a41a5d9df207e860a89c7df66bed9b10b461d3646f1ed5b3ec69d9"
+    },
+    "policyId": "standard-governance-policy",
+    "policyVersion": "0.9",
+    "runtimeProfileId": "standard-runtime-profile",
+    "runtimeProfileVersion": "2024.1",
+    "governanceTier": "tier-1",
+    "degraded": false
+  },
+  "structuralFindings": [],
+  "semanticFindings": [],
+  "determinismMap": [
+    {
+      "evaluationPointId": "BusinessRuleTask_runtime:evaluation",
+      "axisY": "policyDependent",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_Runtime:rule:0:evaluation",
+      "axisY": "runtimeBound",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_Runtime:rule:1:evaluation",
+      "axisY": "runtimeBound",
+      "axisX": "profileScoped",
+      "confidence": 0.8,
+      "policyClause": "determinism.default",
+      "runtimeProfileSection": "root",
+      "ruleId": "semantic-determinism"
+    }
+  ],
+  "runtimeDependencyMap": [
+    {
+      "evaluationPointId": "BusinessRuleTask_runtime:evaluation",
+      "dependency": "expression",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_Runtime:rule:0:evaluation",
+      "dependency": "Rule_Runtime_1:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    },
+    {
+      "evaluationPointId": "Decision_Runtime:rule:1:evaluation",
+      "dependency": "Rule_Runtime_2:input:0",
+      "profileCoverage": "documented",
+      "policyClause": "runtime.default",
+      "ruleId": "semantic-determinism"
+    }
+  ],
+  "decisionAnalysis": [
+    {
+      "decisionId": "Decision_Runtime",
+      "hitPolicy": "FIRST",
+      "rules": 0,
+      "overlaps": 0,
+      "gaps": 1,
+      "unreachableRules": [],
+      "shadowedRules": [],
+      "runtimeDependence": "profileScoped",
+      "severity": "info",
+      "policyClause": "dmn.completeness",
+      "missingCombinations": ["[object Object]=null"],
+      "overlappingRules": []
+    }
+  ],
+  "contractCoverage": [],
+  "summary": {
+    "structuralErrors": 0,
+    "semanticErrors": 0,
+    "warnings": 0,
+    "determinismCompliance": true,
+    "runtimeProfileMissing": false,
+    "contractCoverageRatio": 0,
+    "decisionAnalysisStatus": "complete",
+    "governanceTier": "tier-1",
+    "maturitySignal": {
+      "deterministicAgnostic": 0,
+      "deterministicBound": 0,
+      "policyDependentAgnostic": 0,
+      "policyDependentBound": 33,
+      "nonDeterministicAgnostic": 0,
+      "nonDeterministicBound": 67,
+      "totalEvaluationPoints": 3,
+      "deterministicTotal": 33,
+      "portableTotal": 0
+    }
+  },
+  "dmnExpressionDescriptors": [
+    {
+      "id": "Decision_Runtime:input:0",
+      "decisionId": "Decision_Runtime",
+      "expressionType": "input",
+      "language": "feel",
+      "content": "now()",
+      "typeRef": "string",
+      "determinism": "policyDependent",
+      "functionsUsed": ["now"]
+    },
+    {
+      "id": "Decision_Runtime:rule:0:output:0",
+      "decisionId": "Decision_Runtime",
+      "ruleId": "Decision_Runtime:rule:0",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"ALLOW\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    },
+    {
+      "id": "Decision_Runtime:rule:1:output:0",
+      "decisionId": "Decision_Runtime",
+      "ruleId": "Decision_Runtime:rule:1",
+      "expressionType": "output",
+      "language": "feel",
+      "content": "\"ESCALATE\"",
+      "typeRef": "string",
+      "determinism": "deterministic",
+      "functionsUsed": []
+    }
+  ],
+  "dmnDecisionDescriptors": [
+    {
+      "decisionId": "Decision_Runtime",
+      "decisionName": "Decision_Runtime",
+      "hitPolicy": "FIRST",
+      "ruleCount": 2,
+      "ruleDeterminism": ["deterministic", "deterministic"],
+      "decisionDeterminism": "deterministic",
+      "inputCount": 1,
+      "outputCount": 1
+    }
+  ],
+  "businessRuleTaskDescriptors": [
+    {
+      "taskId": "BusinessRuleTask_runtime",
+      "decisionRef": "",
+      "implementationType": "unknown",
+      "determinism": "unknown",
+      "coupling": "unknown",
+      "resolved": false
+    }
+  ]
+}

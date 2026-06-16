@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Victor França
+#
+# Demonstrates the WU done-criterion: the DPG CLI gates a sample repo in CI.
+# Builds and links the CLI, then runs `dpg gate` over the sample repo's process
+# artifacts — once expecting a PASS, once expecting the gate to FAIL on warnings.
+name: gate-sample
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Link the dpg CLI onto PATH
+        run: npm link
+      - name: Gate passes for a clean, determinism-compliant model
+        working-directory: examples/sample-repo
+        run: dpg gate process/runtime-bound.result.json --format text
+      - name: Gate fails (as expected) for a model with governance warnings
+        working-directory: examples/sample-repo
+        run: |
+          if dpg gate process/loan-preapproval.result.json --format text; then
+            echo "::error::expected the gate to fail on warnings, but it passed"
+            exit 1
+          fi
+          echo "gate failed as expected — pipeline would be blocked"
+      - name: Gate passes for the same model when only errors block
+        working-directory: examples/sample-repo
+        run: dpg gate process/loan-preapproval.result.json --fail-on error --format text

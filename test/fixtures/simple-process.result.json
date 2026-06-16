@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "compilerVersion": "0.1.0",
+    "timestamp": "2026-06-15T22:23:19.970Z",
+    "modelId": "simple-process",
+    "inputHashes": {
+      "bpmn": "7c1d0fbb9cd1355802892deda8b330991d9ce2260f44cdcbf93d2d83ba0b29ff"
+    },
+    "policyId": "standard-governance-policy",
+    "policyVersion": "0.9",
+    "runtimeProfileId": "standard-runtime-profile",
+    "runtimeProfileVersion": "2024.1",
+    "governanceTier": "tier-1",
+    "degraded": false
+  },
+  "structuralFindings": [],
+  "semanticFindings": [],
+  "determinismMap": [
+    {
+      "evaluationPointId": "ServiceTask_1",
+      "axisY": "unknown",
+      "axisX": "unknown",
+      "confidence": 0.5,
+      "policyClause": "service-task-determinism",
+      "ruleId": "SERVICE_TASK_DETERMINISM"
+    }
+  ],
+  "runtimeDependencyMap": [
+    {
+      "evaluationPointId": "ServiceTask_1",
+      "dependency": "unknown",
+      "profileCoverage": "documented",
+      "policyClause": "runtime-coupling",
+      "ruleId": "SERVICE_TASK_CLASSIFICATION"
+    }
+  ],
+  "decisionAnalysis": [],
+  "contractCoverage": [],
+  "summary": {
+    "structuralErrors": 0,
+    "semanticErrors": 0,
+    "warnings": 0,
+    "determinismCompliance": true,
+    "runtimeProfileMissing": false,
+    "contractCoverageRatio": 0,
+    "decisionAnalysisStatus": "skipped",
+    "governanceTier": "tier-1",
+    "maturitySignal": {
+      "deterministicAgnostic": 0,
+      "deterministicBound": 0,
+      "policyDependentAgnostic": 0,
+      "policyDependentBound": 0,
+      "nonDeterministicAgnostic": 0,
+      "nonDeterministicBound": 0,
+      "totalEvaluationPoints": 1,
+      "deterministicTotal": 0,
+      "portableTotal": 0
+    }
+  }
+}
